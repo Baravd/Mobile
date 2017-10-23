@@ -9,4 +9,4 @@ Roles:
 --paying user (non paying user functionalities + get sugestions in which area they should reduce spending after they set the amount or percentage of the money that they would spend)
 --non-paying user(crud bills/payments ,statistics and charts)
 
-Data is kept remote
+Data is kept both remote and local
