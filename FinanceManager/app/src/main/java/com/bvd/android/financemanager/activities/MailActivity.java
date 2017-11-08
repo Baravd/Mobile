@@ -1,7 +1,6 @@
 package com.bvd.android.financemanager.activities;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,7 +24,7 @@ public class MailActivity extends AppCompatActivity {
         final Intent sendIntent = new Intent(Intent.ACTION_SEND);
         sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         sendIntent.putExtra(Intent.EXTRA_TEXT, emailContent.getText().toString());
-        sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { "test@gmail.com" });
+        sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"test@gmail.com"});
 
         if (bugCheckBox.isEnabled()) {
             sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Bug Report");
