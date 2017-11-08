@@ -18,7 +18,7 @@
         </activity>
         <activity android:name=".activities.AllExpensesActivity" />
         <activity android:name=".activities.DetailedExpenseActivity" />
-
+        <activity android:name=".activities.MailActivity"></activity>
     </application>
 
 </manifest>
