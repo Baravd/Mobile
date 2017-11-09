@@ -12,6 +12,7 @@ export default class Home extends React.Component {
             />
             <Button
                 title={"Email Us"}
+                onPress={()=>navigate('Mail')}
             />
         </View>
     }

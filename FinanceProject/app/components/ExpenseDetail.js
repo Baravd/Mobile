@@ -1,19 +1,34 @@
 import React, {Component} from "react";
 
 import {Text} from "react-native-elements";
-import {TextInput, View} from "react-native";
+import {TextInput, View, StyleSheet} from "react-native";
+import Button from "react-native-elements/src/buttons/Button";
 
-export default class ExpenseDetail extends Component{
-    //let currentItem = [{id: "0", name: "none", type: "none"}];
-    render(){
-        const {currentItem} = this.props.navigation.state.params.expense;
-        //console.log(currentItem);
+export default class ExpenseDetail extends Component {
+    render() {
+        const currentItem = this.props.navigation.state.params.expense;
+        this.state = {name: currentItem.name, type: currentItem.type};
 
-        return<View>
+        return <View>
+
             <TextInput
-                style={{height: 40, borderColor: 'red', borderWidth: 1}}
-                value={this.props.navigation.state.params.expense.name}
-                title={"Name"}
+                style={styles.row}
+                editable={true}
+
+                onChangeText={(text) => this.setState({name: text})}
+                value={this.state.name}
+
+            />
+            <TextInput
+                style={styles.row}
+                editable={true}
+
+                onChangeText={(text) => this.setState({type: text})}
+                value={this.state.type}
+
+            />
+            <Button
+                title={"Save"}
 
             />
 
@@ -22,3 +37,10 @@ export default class ExpenseDetail extends Component{
 
 
 }
+const styles = StyleSheet.create({
+    row: {
+        marginBottom: 5,
+        marginTop: 20,
+        borderColor: '#E1B700'
+    }
+});

@@ -5,6 +5,7 @@ import {StackNavigator} from 'react-navigation'
 
 import Home from "./components/Home";
 import ExpenseDetail from "./components/ExpenseDetail";
+import {Mail} from "./components/Mail";
 
 const Stack = StackNavigator({
     Home: {
@@ -17,9 +18,9 @@ const Stack = StackNavigator({
     List:{
         screen: ExpenseList,
     },
-   /* Propose: {
-        screen: Propose,
-    },*/
+    Mail: {
+        screen: Mail,
+    },
 });
 
 export default Stack;

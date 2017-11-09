@@ -7,9 +7,7 @@ global.data = [{id: "1", name: "cheese", type: "Food"},
     {id: "3", name: "electricity", type: "Utilities"}
 ]
 export default class App extends React.Component {
-    static navigationOptions = {
-        title: 'Home',
-    };
+
     render(){
         return <Stack />
     }
