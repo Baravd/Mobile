@@ -15,8 +15,6 @@ export default class ExpenseDetail extends Component {
 
 
     render() {
-        console.log(this.state)
-
         let name = this.state.name;
         return <View>
 
