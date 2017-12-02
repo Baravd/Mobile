@@ -18,13 +18,14 @@ import java.util.List;
 public class AllExpensesActivity extends AppCompatActivity {
     private ListView listView;
     private List<Expense> expenses;
-    private ExpensesDao expensesDao;
+    @Inject
+    public ExpensesDao expensesDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_expenses);
-        expensesDao = new ExpensesDao();
+       // expensesDao = new ExpensesDao();
         expenses = expensesDao.getAll();
         listView = findViewById(R.id.allExpensesListView);
 
