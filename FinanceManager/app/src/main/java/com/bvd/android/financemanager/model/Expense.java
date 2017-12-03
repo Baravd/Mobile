@@ -1,5 +1,10 @@
 package com.bvd.android.financemanager.model;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -8,11 +13,17 @@ import java.util.Date;
  * Created by bara on 06.11.2017.
  */
 
-public class Expense implements Serializable {
+@Entity
+public class Expense implements Serializable, Comparable<Expense > {
+    @PrimaryKey
     private long id;
+    @ColumnInfo(name = "category")
     private String category;
+    @ColumnInfo(name = "name")
     private String name;
+    @ColumnInfo(name="price")
     private BigDecimal price;
+    @ColumnInfo(name="purchase_date")
     private Date purchaseDate;
 
     public Expense(long id, String category, String name, BigDecimal price, Date purchaseDate) {
@@ -79,5 +90,15 @@ public class Expense implements Serializable {
                 ", price=" + price +
                 ", purchaseDate=" + purchaseDate +
                 '}';
+    }
+
+    @Override
+    public int compareTo(@NonNull Expense expense) {
+        if(expense.getId()==id){
+            return 0;
+        }
+        if(expense.getId()<id)
+            return -1;
+        return 1;
     }
 }

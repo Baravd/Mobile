@@ -77,12 +77,22 @@ public class AddExpenseActivity extends AppCompatActivity {
 
     @OnClick(R.id.saveNewExpBtn)
     public void submit() {
-        BigDecimal price = new BigDecimal(String.valueOf(expensePrice.getText()));
+        String priceString = "0";
+        if (!expensePrice.getText().equals(null) && expensePrice.getText().length() > 0) {
+            priceString = String.valueOf(expensePrice.getText());
+        }
+        BigDecimal price = new BigDecimal(priceString);
         String name = String.valueOf(expenseName.getText());
         String category = categorySpinner.getSelectedItem().toString();
         Expense expense = new Expense(category, name, price, selectedDate);
+        expensesDao.save(expense);
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("expense", expense);
+        setResult(Activity.RESULT_OK, resultIntent);
+        Log.v(TAG, "Saving expense from add view=" + expense);
 
-        Log.v(TAG, "Saving expense=" + expense);
+        finish();
+
     }
 
 

@@ -8,13 +8,22 @@ import android.widget.Button;
 
 import com.bvd.android.financemanager.activities.AllExpensesActivity;
 import com.bvd.android.financemanager.activities.MailActivity;
+import com.bvd.android.financemanager.activities.StatisticsActivity;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
+
+    @BindView(R.id.statisticsBtn)
+    public Button statisticsBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         final Button showExpensesBtn = findViewById(R.id.showAllExpensesBtn);
         final Button mailBtn = findViewById(R.id.emailActivityBtn);
@@ -43,5 +52,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MailActivity.class);
         startActivity(intent);
     }
+
+    @OnClick(R.id.statisticsBtn)
+    public void showStatistics() {
+        Intent intent = new Intent(this, StatisticsActivity.class);
+        startActivity(intent);
+    }
+
 
 }

@@ -20,7 +20,8 @@
         <activity android:name=".activities.DetailedExpenseActivity" />
         <activity android:name=".activities.MailActivity" />
         <activity android:name=".activities.AddExpenseActivity" />
-        <activity android:name=".activities.DatePickerActivity"></activity>
+        <activity android:name=".activities.DatePickerActivity" />
+        <activity android:name=".activities.StatisticsActivity"></activity>
     </application>
 
 </manifest>

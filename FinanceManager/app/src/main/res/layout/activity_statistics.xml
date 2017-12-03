@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bvd.android.financemanager.MainActivity">
+    tools:context="com.bvd.android.financemanager.activities.StatisticsActivity">
 
 
     <LinearLayout
@@ -14,22 +14,12 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
-        <Button
-            android:id="@+id/showAllExpensesBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Expenses" />
+        <com.github.mikephil.charting.charts.BarChart
 
-        <Button
-            android:id="@+id/statisticsBtn"
+            android:layout_height="400dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Statistics" />
+            android:id="@+id/bargraph"
+            />
 
-        <Button
-            android:id="@+id/emailActivityBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mail Us" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

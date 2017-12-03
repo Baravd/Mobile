@@ -21,13 +21,16 @@ public class ExpensesDao {
 
     public ExpensesDao() {
         expenses = new ArrayList<>();
-    }
-
-    public List<Expense> getAll() {
-
         expenses.add(new Expense(1, "Food", "Cheese", new BigDecimal("3.98"), new Date()));
         expenses.add(new Expense(2, "Food", "Cola", new BigDecimal("1.98"), new Date()));
         expenses.add(new Expense(3, "House", "Electricity", new BigDecimal("42.50"), new Date()));
+        expenses.add(new Expense(4, "House", "Electricity", new BigDecimal("42.50"), new Date()));
+        expenses.add(new Expense(5, "House", "Electricity", new BigDecimal("42.50"), new Date()));
+        expenses.add(new Expense(6, "Auto", "Electricity", new BigDecimal("42.50"), new Date()));
+        expenses.add(new Expense(7, "Bills", "Electricity", new BigDecimal("42.50"), new Date()));
+    }
+
+    public List<Expense> getAll() {
         return expenses;
     }
 
@@ -35,6 +38,9 @@ public class ExpensesDao {
         long id = generateId();
         expense.setId(id);
         expenses.add(expense);
+    }
+    public void remove(Expense expense) {
+        expenses.remove(expense);
     }
 
     private long generateId() {
@@ -45,5 +51,15 @@ public class ExpensesDao {
             }
         }
         return id;
+    }
+    public List<Expense> getForCategory(String category) {
+        List<Expense>  expensesForCategory = new ArrayList<>();
+        for(Expense expense: expenses){
+            if(expense.getCategory().equals(category)){
+                expensesForCategory.add(expense);
+            }
+        }
+
+        return expensesForCategory;
     }
 }

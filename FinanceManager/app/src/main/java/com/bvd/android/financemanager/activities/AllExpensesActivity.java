@@ -1,9 +1,11 @@
 package com.bvd.android.financemanager.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -17,6 +19,8 @@ import com.bvd.android.financemanager.model.Expense;
 import javax.inject.Inject;
 
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -24,6 +28,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class AllExpensesActivity extends AppCompatActivity {
+    private static final String TAG = AllExpensesActivity.class.getName();
     @BindView(R.id.allExpensesListView)
     public ListView listView;
 
@@ -35,14 +40,38 @@ public class AllExpensesActivity extends AppCompatActivity {
     private ExpenseAdapter expenseArrayAdapter;
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != Activity.RESULT_OK) {
+            Log.v(TAG, "New expense is not ok!");
+        }
+        Expense expense = (Expense) data.getSerializableExtra("expense");
+        expensesDao.save(expense);
+
+
+        expenseArrayAdapter.clear();
+
+         expenseArrayAdapter = new ExpenseAdapter(this,expensesDao.getAll());
+      //  expenseArrayAdapter.addAll(expensesDao.getAll());
+
+        Log.v(TAG, "On activity result" + expensesDao.getAll() + "Count from adapter=" + expenseArrayAdapter.getCount());
+
+
+        expenseArrayAdapter.notifyDataSetChanged();
+        listView.setAdapter(expenseArrayAdapter);
+
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_expenses);
         ButterKnife.bind(this);
+        Log.v(TAG, "On create ALL EXPENSES");
 
         expensesDao = new ExpensesDao();
         expenses = expensesDao.getAll();
-        // listView = findViewById();
 
         expenseArrayAdapter = new ExpenseAdapter(this, expenses);
         listView.setAdapter(expenseArrayAdapter);
@@ -59,11 +88,15 @@ public class AllExpensesActivity extends AppCompatActivity {
         });
 
     }
+
     //id-urile sunt la nivel de activiry sau global?
-    @OnClick(R.id.addExpenseBtn) void addNewExpense(){
-        Intent addFormView = new Intent(this,AddExpenseActivity.class);
-        addFormView.putExtra("bd","nimic");
-        startActivity(addFormView);
+    @OnClick(R.id.addExpenseBtn)
+    void addNewExpense() {
+        Intent addFormView = new Intent(this, AddExpenseActivity.class);
+
+        int result = 0;
+        startActivityForResult(addFormView, result);
+        //startActivity(addFormView);
     }
 
 
