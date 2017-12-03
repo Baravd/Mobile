@@ -23,6 +23,13 @@ public class Expense implements Serializable {
         this.purchaseDate = purchaseDate;
     }
 
+    public Expense(String category, String name, BigDecimal price, Date purchaseDate) {
+        this.category = category;
+        this.name = name;
+        this.price = price;
+        this.purchaseDate = purchaseDate;
+    }
+
     public long getId() {
         return id;
     }

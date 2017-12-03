@@ -18,7 +18,9 @@
         </activity>
         <activity android:name=".activities.AllExpensesActivity" />
         <activity android:name=".activities.DetailedExpenseActivity" />
-        <activity android:name=".activities.MailActivity"></activity>
+        <activity android:name=".activities.MailActivity" />
+        <activity android:name=".activities.AddExpenseActivity" />
+        <activity android:name=".activities.DatePickerActivity"></activity>
     </application>
 
 </manifest>
