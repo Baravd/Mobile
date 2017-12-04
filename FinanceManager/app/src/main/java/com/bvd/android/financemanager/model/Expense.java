@@ -19,7 +19,7 @@ import java.util.Date;
 
 @Entity
 public class Expense implements Serializable, Comparable<Expense > {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private long id;
     @ColumnInfo(name = "category")
     private String category;

@@ -39,16 +39,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Price" />
+            android:hint="Price"
+            android:inputType="numberDecimal" />
 
         <EditText
             android:id="@+id/purchaseDateEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Purchase Date" />
+            android:hint="Purchase Date"
+            android:inputType="date" />
 
         <Button
             android:id="@+id/saveBtn"

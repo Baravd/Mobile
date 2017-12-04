@@ -2,6 +2,7 @@ package com.bvd.android.financemanager.activities;
 
 import android.app.Activity;
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import com.bvd.android.financemanager.R;
 import com.bvd.android.financemanager.Utils;
 import com.bvd.android.financemanager.adapters.CategoriesSpinnerAdapter;
 import com.bvd.android.financemanager.adapters.ExpenseAdapter;
+import com.bvd.android.financemanager.dao.AppDatabase;
 import com.bvd.android.financemanager.dao.ExpensesDao;
 import com.bvd.android.financemanager.dao.IExpenseDao;
 import com.bvd.android.financemanager.model.Categories;
@@ -44,15 +46,15 @@ public class AddExpenseActivity extends AppCompatActivity {
     public Button selectDateBtn;
     @BindView(R.id.saveNewExpBtn)
     public Button saveNewExpBtn;
-    @BindView(R.id.deleteExpBtn)
-    public Button deleteExpBtn;
+
 
 
     private ExpensesDao expensesDao;
+    private AppDatabase database;
+    private IExpenseDao iExpenseDao;
 
     private int status;
 
-    IExpenseDao iExpenseDao;
 
     private Date selectedDate;
 
@@ -63,8 +65,10 @@ public class AddExpenseActivity extends AppCompatActivity {
         Log.v(TAG, "Spinner=" + categorySpinner);
         setContentView(R.layout.activity_add_expense);
         ButterKnife.bind(this);
+        database = AppDatabase.getAppDatabase(this);
 
-        expensesDao = new ExpensesDao();
+        iExpenseDao = database.iExpenseDao();
+        //expensesDao = new ExpensesDao();
 
         //categorySpinner = findViewById(CATEGORY_SPINNER);
         List<Categories> categories = Arrays.asList(Categories.values());
@@ -93,7 +97,7 @@ public class AddExpenseActivity extends AppCompatActivity {
         String name = String.valueOf(expenseName.getText());
         String category = categorySpinner.getSelectedItem().toString();
         Expense expense = new Expense(category, name, price, selectedDate);
-        expensesDao.save(expense);
+        //iExpenseDao.insertAll(expense);
 
         Intent resultIntent = new Intent();
         resultIntent.putExtra("expense", expense);
@@ -123,5 +127,14 @@ public class AddExpenseActivity extends AppCompatActivity {
             }
             Log.v(TAG, "Selected date=" + resultedDate);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("expense", -1);
+        setResult(Activity.RESULT_CANCELED, resultIntent);
+        finish();
     }
 }

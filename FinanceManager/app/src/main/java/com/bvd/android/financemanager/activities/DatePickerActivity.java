@@ -59,4 +59,14 @@ public class DatePickerActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onBackPressed(){
+        Intent resultIntent = new Intent();
+        Utils utils = new Utils();
+        String date = utils.getFormattedDate(new Date());
+        resultIntent.putExtra("selectedDate", date);
+        setResult(Activity.RESULT_OK, resultIntent);
+        finish();
+    }
 }

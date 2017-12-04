@@ -4,7 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.bvd.android.financemanager.R;
+import com.bvd.android.financemanager.dao.AppDatabase;
 import com.bvd.android.financemanager.dao.ExpensesDao;
+import com.bvd.android.financemanager.dao.IExpenseDao;
 import com.bvd.android.financemanager.model.Categories;
 import com.bvd.android.financemanager.model.Expense;
 import com.github.mikephil.charting.charts.BarChart;
@@ -27,12 +29,16 @@ public class StatisticsActivity extends AppCompatActivity {
     @BindView(R.id.bargraph)
     public BarChart barChart;
     private ArrayList<BarEntry> barEntries;
+    private AppDatabase appDatabase;
+    private IExpenseDao iExpenseDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
         ButterKnife.bind(this);
+        appDatabase = AppDatabase.getAppDatabase(this);
+        iExpenseDao = appDatabase.iExpenseDao();
 
         int count = 0;
         ArrayList<String> labels = new ArrayList<>();
@@ -60,11 +66,10 @@ public class StatisticsActivity extends AppCompatActivity {
     }
 
     ArrayList<BarEntry> generateBarEntries() {
-        ExpensesDao expensesDao = new ExpensesDao();
         ArrayList<BarEntry> barEntries = new ArrayList<>();
         int count = 0;
         for (Categories c : Categories.values()) {
-            int size = expensesDao.getForCategory(String.valueOf(c)).size();
+            int size = iExpenseDao.getByCategory(String.valueOf(c)).size();
             barEntries.add(new BarEntry(count, size));
             count++;
         }
