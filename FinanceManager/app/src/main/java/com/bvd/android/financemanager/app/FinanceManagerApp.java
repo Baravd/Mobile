@@ -19,6 +19,9 @@ public class FinanceManagerApp extends Application {
 
     public AppComponent injector;
 
+    public static String getTAG() {
+        return TAG;
+    }
 
 
     @Override

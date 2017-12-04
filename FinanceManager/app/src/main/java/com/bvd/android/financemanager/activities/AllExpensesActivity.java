@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import com.bvd.android.financemanager.R;
 import com.bvd.android.financemanager.adapters.ExpenseAdapter;
+import com.bvd.android.financemanager.app.FinanceManagerApp;
 import com.bvd.android.financemanager.dao.ExpensesDao;
 import com.bvd.android.financemanager.model.Expense;
 import javax.inject.Inject;
@@ -25,6 +26,8 @@ public class AllExpensesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_expenses);
+
+        ((FinanceManagerApp)getApplication()).getInjector().inject(this);
        // expensesDao = new ExpensesDao();
         expenses = expensesDao.getAll();
         listView = findViewById(R.id.allExpensesListView);

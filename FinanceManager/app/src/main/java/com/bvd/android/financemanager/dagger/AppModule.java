@@ -34,7 +34,7 @@ public class AppModule {
     @Provides
     @Singleton
     public ExpensesDao provideExpenseDao(){
-        return new ExpensesDao(app);
+        return new ExpensesDao();
     }
 
 
