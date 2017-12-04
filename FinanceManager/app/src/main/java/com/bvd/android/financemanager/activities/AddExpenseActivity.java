@@ -1,6 +1,7 @@
 package com.bvd.android.financemanager.activities;
 
 import android.app.Activity;
+import android.arch.persistence.room.Dao;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import com.bvd.android.financemanager.Utils;
 import com.bvd.android.financemanager.adapters.CategoriesSpinnerAdapter;
 import com.bvd.android.financemanager.adapters.ExpenseAdapter;
 import com.bvd.android.financemanager.dao.ExpensesDao;
+import com.bvd.android.financemanager.dao.IExpenseDao;
 import com.bvd.android.financemanager.model.Categories;
 import com.bvd.android.financemanager.model.Expense;
 
@@ -32,7 +34,7 @@ import butterknife.OnClick;
 public class AddExpenseActivity extends AppCompatActivity {
     public static final String TAG = AddExpenseActivity.class.getName();
     public static final int CATEGORY_SPINNER = R.id.category_spinner;
-    //@BindView(R.id.category_spinner)
+    @BindView(R.id.category_spinner)
     public Spinner categorySpinner;
     @BindView(R.id.expNameTxt)
     public EditText expenseName;
@@ -42,9 +44,15 @@ public class AddExpenseActivity extends AppCompatActivity {
     public Button selectDateBtn;
     @BindView(R.id.saveNewExpBtn)
     public Button saveNewExpBtn;
+    @BindView(R.id.deleteExpBtn)
+    public Button deleteExpBtn;
+
+
     private ExpensesDao expensesDao;
 
     private int status;
+
+    IExpenseDao iExpenseDao;
 
     private Date selectedDate;
 
@@ -58,7 +66,7 @@ public class AddExpenseActivity extends AppCompatActivity {
 
         expensesDao = new ExpensesDao();
 
-        categorySpinner = findViewById(CATEGORY_SPINNER);
+        //categorySpinner = findViewById(CATEGORY_SPINNER);
         List<Categories> categories = Arrays.asList(Categories.values());
         ArrayAdapter<Categories> categoriesSpinnerAdapter = new ArrayAdapter<Categories>(this, R.layout.support_simple_spinner_dropdown_item, categories);
         categoriesSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
@@ -81,11 +89,12 @@ public class AddExpenseActivity extends AppCompatActivity {
         if (!expensePrice.getText().equals(null) && expensePrice.getText().length() > 0) {
             priceString = String.valueOf(expensePrice.getText());
         }
-        BigDecimal price = new BigDecimal(priceString);
+        float price = Float.valueOf(priceString);
         String name = String.valueOf(expenseName.getText());
         String category = categorySpinner.getSelectedItem().toString();
         Expense expense = new Expense(category, name, price, selectedDate);
         expensesDao.save(expense);
+
         Intent resultIntent = new Intent();
         resultIntent.putExtra("expense", expense);
         setResult(Activity.RESULT_OK, resultIntent);

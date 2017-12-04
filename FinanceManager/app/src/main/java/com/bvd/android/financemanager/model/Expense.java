@@ -2,8 +2,12 @@ package com.bvd.android.financemanager.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
+
+import com.bvd.android.financemanager.converters.DateConverter;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -22,11 +26,15 @@ public class Expense implements Serializable, Comparable<Expense > {
     @ColumnInfo(name = "name")
     private String name;
     @ColumnInfo(name="price")
-    private BigDecimal price;
+    private float price;
     @ColumnInfo(name="purchase_date")
+    @TypeConverters({DateConverter.class})
     private Date purchaseDate;
 
-    public Expense(long id, String category, String name, BigDecimal price, Date purchaseDate) {
+
+
+
+    public Expense(long id, String category, String name, float price, Date purchaseDate) {
         this.id = id;
         this.category = category;
         this.name = name;
@@ -34,11 +42,14 @@ public class Expense implements Serializable, Comparable<Expense > {
         this.purchaseDate = purchaseDate;
     }
 
-    public Expense(String category, String name, BigDecimal price, Date purchaseDate) {
+    public Expense(String category, String name, float price, Date purchaseDate) {
         this.category = category;
         this.name = name;
         this.price = price;
         this.purchaseDate = purchaseDate;
+    }
+
+    public Expense() {
     }
 
     public long getId() {
@@ -65,11 +76,11 @@ public class Expense implements Serializable, Comparable<Expense > {
         this.name = name;
     }
 
-    public BigDecimal getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 

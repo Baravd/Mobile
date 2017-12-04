@@ -21,13 +21,13 @@ public class ExpensesDao {
 
     public ExpensesDao() {
         expenses = new ArrayList<>();
-        expenses.add(new Expense(1, "Food", "Cheese", new BigDecimal("3.98"), new Date()));
-        expenses.add(new Expense(2, "Food", "Cola", new BigDecimal("1.98"), new Date()));
-        expenses.add(new Expense(3, "House", "Electricity", new BigDecimal("42.50"), new Date()));
-        expenses.add(new Expense(4, "House", "Electricity", new BigDecimal("42.50"), new Date()));
-        expenses.add(new Expense(5, "House", "Electricity", new BigDecimal("42.50"), new Date()));
-        expenses.add(new Expense(6, "Auto", "Electricity", new BigDecimal("42.50"), new Date()));
-        expenses.add(new Expense(7, "Bills", "Electricity", new BigDecimal("42.50"), new Date()));
+        expenses.add(new Expense(1, "Food", "Cheese", 3.98f, new Date()));
+        expenses.add(new Expense(2, "Food", "Cola",1.98f, new Date()));
+        expenses.add(new Expense(3, "House", "Electricity", 42.50f, new Date()));
+        expenses.add(new Expense(4, "House", "Electricity",  42.50f, new Date()));
+        expenses.add(new Expense(5, "House", "Electricity", 42.50f, new Date()));
+        expenses.add(new Expense(6, "Auto", "Electricity", 42.50f, new Date()));
+        expenses.add(new Expense(7, "Bills", "Electricity", 42.50f, new Date()));
     }
 
     public List<Expense> getAll() {

@@ -28,5 +28,8 @@ public interface IExpenseDao {
     @Delete
     void delete(Expense expense);
 
+    @Query("SELECT * FROM Expense WHERE category=:category ")
+    List<Expense> getByCategory(String category);
+
 
 }

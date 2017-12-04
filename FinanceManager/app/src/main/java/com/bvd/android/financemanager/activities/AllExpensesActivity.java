@@ -16,11 +16,6 @@ import com.bvd.android.financemanager.adapters.ExpenseAdapter;
 import com.bvd.android.financemanager.dao.ExpensesDao;
 import com.bvd.android.financemanager.model.Expense;
 
-import javax.inject.Inject;
-
-
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -49,16 +44,10 @@ public class AllExpensesActivity extends AppCompatActivity {
         expensesDao.save(expense);
 
 
-        expenseArrayAdapter.clear();
-
-         expenseArrayAdapter = new ExpenseAdapter(this,expensesDao.getAll());
-      //  expenseArrayAdapter.addAll(expensesDao.getAll());
 
         Log.v(TAG, "On activity result" + expensesDao.getAll() + "Count from adapter=" + expenseArrayAdapter.getCount());
 
-
         expenseArrayAdapter.notifyDataSetChanged();
-        listView.setAdapter(expenseArrayAdapter);
 
 
     }
@@ -89,7 +78,6 @@ public class AllExpensesActivity extends AppCompatActivity {
 
     }
 
-    //id-urile sunt la nivel de activiry sau global?
     @OnClick(R.id.addExpenseBtn)
     void addNewExpense() {
         Intent addFormView = new Intent(this, AddExpenseActivity.class);

@@ -54,4 +54,12 @@ public class ExpenseAdapter extends ArrayAdapter<Expense> {
 
         return rowView;
     }
+
+    public List<Expense> getExpenses() {
+        return expenses;
+    }
+
+    public void setExpenses(List<Expense> expenses) {
+        this.expenses = expenses;
+    }
 }
