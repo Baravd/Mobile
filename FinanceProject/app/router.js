@@ -6,6 +6,7 @@ import {StackNavigator} from 'react-navigation'
 import Home from "./components/Home";
 import ExpenseDetail from "./components/ExpenseDetail";
 import {Mail} from "./components/Mail";
+import {AddExpenseView} from "./components/AddExpenseView";
 
 const Stack = StackNavigator({
     Home: {
@@ -21,6 +22,9 @@ const Stack = StackNavigator({
     Mail: {
         screen: Mail,
     },
+    AddExpenseView: {
+        screen: AddExpenseView,
+    }
 });
 
 export default Stack;

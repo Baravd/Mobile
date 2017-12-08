@@ -1,22 +1,26 @@
 import React, {Component} from "react";
-
-import {Text} from "react-native-elements";
-import {TextInput, View, StyleSheet} from "react-native";
-import Button from "react-native-elements/src/buttons/Button";
+import {TextInput, View, StyleSheet, Button, AsyncStorage} from "react-native";
 import DatePicker from "react-native-datepicker";
 
-export default class ExpenseDetail extends Component {
-    render() {
-        const currentItem = this.props.navigation.state.params.expense;
-        this.state = {name: currentItem.name, type: currentItem.type, id: currentItem.id, date: currentItem.date};
 
-        return <View>
+export class AddExpenseView extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {id: '-1', name: "Name", type: "Type", date: new Date()};
+
+    }
+
+    render() {
+
+        return (<View>
             <TextInput
                 style={styles.row}
                 editable={true}
+                keyboardType='numeric'
 
                 onChangeText={(text) => this.setState({id: text})}
                 value={this.state.id}
+                maxLength={10}
 
             />
             <TextInput
@@ -44,18 +48,29 @@ export default class ExpenseDetail extends Component {
 
             />
             <Button
-                title={"Save Changes"}
+                title={"Save"}
+                onPress = {()=>{
+
+                    AsyncStorage.setItem(this.state.id, JSON.stringify({
+                        id: this.state.id,
+                        name: this.state.name,
+                        type: this.state.type,
+                        date: this.state.date
+                    })).then(() => {
+                        //this.props.navigation.state.params.updateState();
+                        this.props.navigation.goBack();
+                    });
+
+
+                }}
+
 
             />
-            <Button
-                title={"Delete"}
-            />
 
-        </View>
+        </View>)
     }
-
-
 }
+
 const styles = StyleSheet.create({
     row: {
         marginBottom: 5,
