@@ -19,8 +19,10 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "chart.js": "^2.7.1",
     "expo": "^22.0.2",
     "react": "16.0.0-beta.5",
+    "react-chartjs-2": "^2.6.4",
     "react-native": "^0.49.5",
     "react-native-communications": "latest",
     "react-native-datepicker": "^1.6.0",

@@ -1,7 +1,12 @@
 import { Bar } from 'react-native-pathjs-charts'
 import React from 'react';
+import {View, StyleSheet} from "react-native";
+
 
 export class Statistics extends React.Component{
+    constructor(props){
+        super(props);
+    }
     render() {
         options = {
             width: 300,
@@ -49,13 +54,26 @@ export class Statistics extends React.Component{
                 }
             }
         }
+        let date=[]
         for(let i=0;i<10;i++) {
-            data.push([{type:i, count:i+2}]);
+            date.push([{type:i, count:i}]);
         }
+        console.log(data);
         return <View>
             <Bar
-                data={data} options={options} accessorKey='count'
+                data={date} options={options} accessorKey='count'
             />
         </View>
     }
 }
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    chart: {
+        flex: 1
+    }
+});

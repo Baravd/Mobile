@@ -26,7 +26,7 @@ const Stack = StackNavigator({
     AddExpenseView: {
         screen: AddExpenseView,
     },
-    Statisctics: {
+    Statistics: {
         screen: Statistics,
     }
 

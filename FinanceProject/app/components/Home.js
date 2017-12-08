@@ -12,7 +12,7 @@ export default class Home extends React.Component {
             />
             <Button
                 title={"Statistics" }
-                onPress={() => navigate('List')}
+                onPress={() => navigate('Statistics')}
             />
             <Button
                 title={"Email Us"}
