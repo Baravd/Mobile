@@ -54,7 +54,7 @@ export class Statistics extends React.Component{
         }
         return <View>
             <Bar
-                data={data} options={options} accessorKey='pages'
+                data={data} options={options} accessorKey='count'
             />
         </View>
     }
