@@ -45,7 +45,7 @@ export default class ExpenseDetail extends Component {
             />
             <Button
                 title={"Save Changes"}
-                /*onPress={() => {
+                onPress={() => {
                     AsyncStorage.mergeItem(this.props.navigation.state.params.expense.id, JSON.stringify({
                             nume: this.state.nume,
                             type: this.state.type,
@@ -56,18 +56,18 @@ export default class ExpenseDetail extends Component {
                         this.props.navigation.goBack();
                     })
                 }
-                }*/
+                }
 
             />
             <Button
                 title={"Delete"}
-                /*onPress={() => {
+                onPress={() => {
                     AsyncStorage.removeItem(this.props.navigation.state.params.expense.id)
                         .then(() => {
                             this.props.navigation.state.params.updateState();
                             this.props.navigation.goBack();
                         })
-                }}*/
+                }}
 
             />
 
