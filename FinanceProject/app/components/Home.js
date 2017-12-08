@@ -11,6 +11,10 @@ export default class Home extends React.Component {
                 onPress={() => navigate('List')}
             />
             <Button
+                title={"Statistics" }
+                onPress={() => navigate('List')}
+            />
+            <Button
                 title={"Email Us"}
                 onPress={()=>navigate('Mail')}
             />

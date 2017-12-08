@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import ExpenseDetail from "./components/ExpenseDetail";
 import {Mail} from "./components/Mail";
 import {AddExpenseView} from "./components/AddExpenseView";
+import {Statistics} from "./components/Statistics";
 
 const Stack = StackNavigator({
     Home: {
@@ -16,7 +17,7 @@ const Stack = StackNavigator({
         screen: ExpenseDetail,
         path: 'details/:id',
     },
-    List:{
+    List: {
         screen: ExpenseList,
     },
     Mail: {
@@ -24,7 +25,11 @@ const Stack = StackNavigator({
     },
     AddExpenseView: {
         screen: AddExpenseView,
+    },
+    Statisctics: {
+        screen: Statistics,
     }
+
 });
 
 export default Stack;

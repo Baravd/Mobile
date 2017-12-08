@@ -1,6 +1,5 @@
 import React, {Component} from "react";
-import {View, Text, FlatList, AsyncStorage} from "react-native";
-import {List, ListItem} from "react-native-elements";
+import {View, Text, FlatList, AsyncStorage, ListView, TouchableOpacity} from "react-native";
 import Button from "react-native-elements/src/buttons/Button";
 
 
@@ -16,8 +15,8 @@ export default class ExpenseList extends React.Component {
     updateState() {
         console.log("refresh list");
         AsyncStorage.getAllKeys().then((keys) => {
-            expenses = [];
-            for (keyIndex in keys) {
+            let expenses = [];
+            for (let keyIndex in keys) {
                 AsyncStorage.getItem(keys[keyIndex]).then((value) => {
                     expenses.push(JSON.parse(value));
                     this.setState({ds: global.ds.cloneWithRows(expenses)});
@@ -27,33 +26,40 @@ export default class ExpenseList extends React.Component {
         });
     }
 
-    render() {
-        const {navigate} = this.props.navigation;
+    renderRow(record) {
         return (
             <View>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Details', {
+                    expense: record,
+                    updateState: this.updateState.bind(this)
+                })}>
+                    <View style={{flexDirection: 'row', padding: 10}}>
+                        <View stle={{flex: 1}}>
+                            <Text>{record.nume}</Text>
+                        </View>
+                        <View style={{flex: 1}}>
+                            <Text style={{textAlign: 'right'}}>{record.type}</Text>
+                        </View>
+                    </View>
+                </TouchableOpacity>
+            </View>
+        );
+    }
 
 
-                <List>
-                    <FlatList
+    render() {
 
-                        dataSource={global.ds}
-                        keyExtractor={this._keyExtractor}
-                        renderItem={({item}) => (
-                            <ListItem
-                                onPress={() => {
-                                    navigate('Details', {expense: item})
-
-                                }}
-                                title={item.name}
-                                subtitle={item.type}
-                            />
-                        )}
-                    />
-                </List>
-
+        return (
+            <View>
+                <ListView
+                    dataSource={this.state.ds}
+                    renderRow={this.renderRow.bind(this)}
+                />
 
                 <Button title="Add Expense"
-                        onPress={() => this.props.navigation.navigate('AddExpenseView')}
+                        onPress={() => this.props.navigation.navigate('AddExpenseView',{
+                            updateState: this.updateState.bind(this)
+                        })}
                 />
 
 
@@ -62,8 +68,5 @@ export default class ExpenseList extends React.Component {
             ;
     }
 
-    showDetails(item) {
 
-
-    }
 }

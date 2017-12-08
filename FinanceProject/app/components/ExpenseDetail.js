@@ -1,14 +1,14 @@
 import React, {Component} from "react";
 
 import {Text} from "react-native-elements";
-import {TextInput, View, StyleSheet} from "react-native";
+import {TextInput, View, StyleSheet, AsyncStorage} from "react-native";
 import Button from "react-native-elements/src/buttons/Button";
 import DatePicker from "react-native-datepicker";
 
 export default class ExpenseDetail extends Component {
     render() {
         const currentItem = this.props.navigation.state.params.expense;
-        this.state = {name: currentItem.name, type: currentItem.type, id: currentItem.id, date: currentItem.date};
+        this.state = {id: currentItem.id, nume: currentItem.nume, type: currentItem.type, date: currentItem.date};
 
         return <View>
             <TextInput
@@ -23,8 +23,8 @@ export default class ExpenseDetail extends Component {
                 style={styles.row}
                 editable={true}
 
-                onChangeText={(text) => this.setState({name: text})}
-                value={this.state.name}
+                onChangeText={(text) => this.setState({nume: text})}
+                value={this.state.nume}
 
             />
             <TextInput
@@ -45,10 +45,30 @@ export default class ExpenseDetail extends Component {
             />
             <Button
                 title={"Save Changes"}
+                /*onPress={() => {
+                    AsyncStorage.mergeItem(this.props.navigation.state.params.expense.id, JSON.stringify({
+                            nume: this.state.nume,
+                            type: this.state.type,
+                            date: this.state.date
+                        })
+                    ).then(() => {
+                        this.props.navigation.state.params.updateState();
+                        this.props.navigation.goBack();
+                    })
+                }
+                }*/
 
             />
             <Button
                 title={"Delete"}
+                /*onPress={() => {
+                    AsyncStorage.removeItem(this.props.navigation.state.params.expense.id)
+                        .then(() => {
+                            this.props.navigation.state.params.updateState();
+                            this.props.navigation.goBack();
+                        })
+                }}*/
+
             />
 
         </View>

@@ -6,7 +6,7 @@ import DatePicker from "react-native-datepicker";
 export class AddExpenseView extends Component {
     constructor(props) {
         super(props);
-        this.state = {id: '-1', name: "Name", type: "Type", date: new Date()};
+        this.state = { nume: "Name", type: "Type", date: new Date(),id: '-1'};
 
     }
 
@@ -27,8 +27,8 @@ export class AddExpenseView extends Component {
                 style={styles.row}
                 editable={true}
 
-                onChangeText={(text) => this.setState({name: text})}
-                value={this.state.name}
+                onChangeText={(text) => this.setState({nume: text})}
+                value={this.state.nume}
 
             />
             <TextInput
@@ -49,18 +49,20 @@ export class AddExpenseView extends Component {
             />
             <Button
                 title={"Save"}
-                onPress = {()=>{
+                onPress={() => {
+                    console.log(this.state.id, this.state.nume, this.state.type, this.state.date);
 
                     AsyncStorage.setItem(this.state.id, JSON.stringify({
                         id: this.state.id,
-                        name: this.state.name,
+                        nume: this.state.nume,
                         type: this.state.type,
                         date: this.state.date
                     })).then(() => {
-                        //this.props.navigation.state.params.updateState();
+                        console.log("Add worked");
+                        this.props.navigation.state.params.updateState();
+                        console.log("It worked")
                         this.props.navigation.goBack();
                     });
-
 
                 }}
 
