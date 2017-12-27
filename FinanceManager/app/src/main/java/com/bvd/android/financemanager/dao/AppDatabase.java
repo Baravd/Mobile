@@ -12,7 +12,7 @@ import com.bvd.android.financemanager.model.Expense;
  */
 
 
-@Database(entities = {Expense.class}, version = 1)
+@Database(entities = {Expense.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;

@@ -61,5 +61,6 @@ public class ExpenseAdapter extends ArrayAdapter<Expense> {
 
     public void setExpenses(List<Expense> expenses) {
         this.expenses = expenses;
+        this.notifyDataSetChanged();
     }
 }

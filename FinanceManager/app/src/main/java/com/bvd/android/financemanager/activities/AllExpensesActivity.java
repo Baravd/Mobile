@@ -98,6 +98,12 @@ public class AllExpensesActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        expenseArrayAdapter.notifyDataSetChanged();
+    }
+
     @OnClick(R.id.addExpenseBtn)
     void addNewExpense() {
         Intent addFormView = new Intent(this, AddExpenseActivity.class);

@@ -42,6 +42,7 @@ public class Expense implements Serializable, Comparable<Expense > {
         this.purchaseDate = purchaseDate;
     }
 
+    @Ignore
     public Expense(String category, String name, float price, Date purchaseDate) {
         this.category = category;
         this.name = name;
