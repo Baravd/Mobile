@@ -63,4 +63,8 @@ public class ExpenseAdapter extends ArrayAdapter<Expense> {
         this.expenses = expenses;
         this.notifyDataSetChanged();
     }
+    public void addExpense(Expense expense) {
+        this.expenses.add(expense);
+        this.notifyDataSetChanged();
+    }
 }

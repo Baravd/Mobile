@@ -16,6 +16,8 @@ import com.bvd.android.financemanager.dao.AppDatabase;
 import com.bvd.android.financemanager.dao.ExpensesDao;
 import com.bvd.android.financemanager.dao.IExpenseDao;
 import com.bvd.android.financemanager.model.Expense;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -32,11 +34,11 @@ public class AllExpensesActivity extends AppCompatActivity {
     public FloatingActionButton addBtn;
 
     private List<Expense> expenses;
-    private ExpensesDao expensesDao;
     private ExpenseAdapter expenseArrayAdapter;
 
     private AppDatabase database;
     private IExpenseDao iExpenseDao;
+    private DatabaseReference  expensesReference;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -53,14 +55,16 @@ public class AllExpensesActivity extends AppCompatActivity {
         }
         Expense expense = (Expense) data.getSerializableExtra("expense");
         Log.v(TAG, "We received the expense=" + expense);
-        //expensesDao.save(expense);
-
         iExpenseDao.insertAll(expense);
-        //Log.v(TAG, "On activity result" + expensesDao.getAll() + "Count from adapter=" + expenseArrayAdapter.getCount());
         Log.v(TAG, "From db=" + iExpenseDao.getAll());
 
-        expenseArrayAdapter.setExpenses(iExpenseDao.getAll());
-        expenseArrayAdapter.notifyDataSetChanged();
+        expenseArrayAdapter.add(expense);
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        //expensesReference = firebaseDatabase.getReference("https://financemanager-63f17.firebaseio.com/").child("expenses");
+        expensesReference = firebaseDatabase.getReference("expenses");
+
+        expensesReference.setValue(iExpenseDao.getAll());
+
 
 
     }
@@ -95,6 +99,8 @@ public class AllExpensesActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
 
     }
 
