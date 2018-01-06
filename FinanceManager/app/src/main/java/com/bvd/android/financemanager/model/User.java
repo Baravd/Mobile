@@ -8,25 +8,17 @@ import java.util.List;
  */
 
 public class User implements Serializable {
-    List<Expense> expenses;
     boolean isPremium;
     String uid;
     String email;
 
-    public User(List<Expense> expenses, boolean isPremium, String uid, String email) {
-        this.expenses = expenses;
+    public User( boolean isPremium, String uid, String email) {
+
         this.isPremium = isPremium;
         this.uid = uid;
         this.email = email;
     }
 
-    public List<Expense> getExpenses() {
-        return expenses;
-    }
-
-    public void setExpenses(List<Expense> expenses) {
-        this.expenses = expenses;
-    }
 
     public boolean isPremium() {
         return isPremium;
@@ -55,7 +47,6 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "User{" +
-                "expenses=" + expenses +
                 ", isPremium=" + isPremium +
                 ", uid='" + uid + '\'' +
                 ", email='" + email + '\'' +

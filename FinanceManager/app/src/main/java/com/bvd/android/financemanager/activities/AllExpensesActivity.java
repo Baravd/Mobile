@@ -71,10 +71,15 @@ public class AllExpensesActivity extends AppCompatActivity {
         Log.v(TAG, "From db=" + iExpenseDao.getAll());
 
         expenseArrayAdapter.add(expense);
+        expenses.add(expense);
         //expensesReference = firebaseDatabase.getReference("https://financemanager-63f17.firebaseio.com/").child("expenses");
-        iExpenseDao.insertAll(expense);
+        //iExpenseDao.insertAll(expense);
         expensesReference = firebaseDatabase.getReference("users").child(currentUser.getUid()).child("expenses");
-        expensesReference.setValue(iExpenseDao.getAll());
+        //expensesReference.setValue(iExpenseDao.getAll());
+        DatabaseReference push = expensesReference.push();
+        String key = push.getKey();
+        expense.setFireKey(key);
+        push.setValue(expense);
         //setDataOnFireBase(iExpenseDao.getAll());
 
     }
@@ -104,6 +109,7 @@ public class AllExpensesActivity extends AppCompatActivity {
 
 
         expensesReference = firebaseDatabase.getReference("users").child(currentUser.getUid()).child("expenses");
+        expensesReference.keepSynced(true);
         //expensesReference.setValue(iExpenseDao.getAll());
         expensesReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -125,12 +131,14 @@ public class AllExpensesActivity extends AppCompatActivity {
 
                 //expenses.addAll(expenseMap);
                 Log.d(TAG, "ListView: " + listView);
-                if (expenseMap != null) {
-                    expenseArrayAdapter.setExpenses(expenseMap);
+               /* iExpenseDao.deleteAll();
+                for(Expense expense: expenseMap){
+                    iExpenseDao.insertAll(expense);
+                }*/
+               expenses = expenseMap;
 
-                    expenseArrayAdapter.notifyDataSetChanged();
-
-                }
+                expenseArrayAdapter.setExpenses(expenseMap);
+                expenseArrayAdapter.notifyDataSetChanged();
 
 
                 Log.d(TAG, "User id: " + currentUser.getUid() + "|" + currentUser.getEmail());

@@ -16,6 +16,10 @@ import com.bvd.android.financemanager.Utils;
 import com.bvd.android.financemanager.dao.AppDatabase;
 import com.bvd.android.financemanager.dao.IExpenseDao;
 import com.bvd.android.financemanager.model.Expense;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -48,9 +52,17 @@ public class DetailedExpenseActivity extends AppCompatActivity {
     @BindView(R.id.idTextView)
     TextView id;
 
+    private String fireKey;
+
     private Utils utils;
     private AppDatabase appDatabase;
     private IExpenseDao iExpenseDao;
+
+    private FirebaseAuth auth;
+    private FirebaseUser currentUser;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference expensesReference;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +70,9 @@ public class DetailedExpenseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detailed_expense);
 
         ButterKnife.bind(this);
+        auth = FirebaseAuth.getInstance();
+        currentUser = auth.getCurrentUser();
+        firebaseDatabase = FirebaseDatabase.getInstance();
 
         appDatabase = AppDatabase.getAppDatabase(this);
         iExpenseDao = appDatabase.iExpenseDao();
@@ -73,6 +88,7 @@ public class DetailedExpenseActivity extends AppCompatActivity {
         //purchaseDate.setText(utils.getFormattedDate(extras.getPurchaseDate()));
         //purchaseDate.setText(utils.getFormattedDate(extras.getPurchaseDate()));
         id.setText(String.valueOf(extras.getId()));
+        fireKey = extras.getFireKey();
 
     }
 
@@ -90,8 +106,11 @@ public class DetailedExpenseActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         Expense expense = new Expense(idValue,category,name,price,date);
+        expense.setFireKey(fireKey);
 
-        iExpenseDao.updateExpenses(expense);
+        //iExpenseDao.updateExpenses(expense);
+        expensesReference = firebaseDatabase.getReference("users").child(currentUser.getUid()).child("expenses").child(fireKey);
+        expensesReference.setValue(expense);
         finish();
 
     }
@@ -108,8 +127,10 @@ public class DetailedExpenseActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         Expense expense = new Expense(idValue,category,name,price,date);
+        expensesReference = firebaseDatabase.getReference("users").child(currentUser.getUid()).child("expenses").child(fireKey);
+        expensesReference.setValue(null);
 
-        iExpenseDao.delete(expense);
+        //iExpenseDao.delete(expense);
     }
     @OnClick(R.id.deleteExpBtn)
     public void addDialogAtDeleteAction() {

@@ -27,6 +27,18 @@ public class Expense implements Serializable, Comparable<Expense > {
     private String name;
     @ColumnInfo(name="price")
     private float price;
+
+    public String getFireKey() {
+        return fireKey;
+    }
+
+    public void setFireKey(String fireKey) {
+        this.fireKey = fireKey;
+    }
+
+    @Ignore
+
+    private String fireKey;
    // @ColumnInfo(name="purchase_date")
 
    /* @TypeConverters({DateConverter.class})

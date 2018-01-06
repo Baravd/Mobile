@@ -86,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 String uid = currentUser.getUid();
                                 String email1 = currentUser.getEmail();
                                 boolean enabled = premiumCheckBox.isChecked();
-                                User myUser = new User(new ArrayList<Expense>(), enabled, uid, email1);
+                                User myUser = new User( enabled, uid, email1);
                                 expensesReference.child(uid).setValue(myUser);
 
                                 redirectToMainView(user, myUser);
