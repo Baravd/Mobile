@@ -99,10 +99,13 @@ public class AddExpenseActivity extends AppCompatActivity {
         Expense expense = new Expense(category, name, price, selectedDate);
         //iExpenseDao.insertAll(expense);
 
+
+
         Intent resultIntent = new Intent();
         resultIntent.putExtra("expense", expense);
         setResult(Activity.RESULT_OK, resultIntent);
         Log.v(TAG, "Saving expense from add view=" + expense);
+
 
         finish();
 

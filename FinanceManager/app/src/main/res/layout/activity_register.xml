@@ -37,6 +37,12 @@
             android:hint="Retype Password"
             android:inputType="textPassword" />
 
+        <CheckBox
+            android:id="@+id/registerPremiumCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="I want to be premium(5$)" />
+
         <Button
             android:id="@+id/registerCreateAccBtn"
             style="@style/FirebaseUI.Button"

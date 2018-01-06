@@ -70,7 +70,8 @@ public class DetailedExpenseActivity extends AppCompatActivity {
         category.setText(extras.getCategory());
         name.setText(extras.getName());
         price.setText(String.valueOf(extras.getPrice()));
-        purchaseDate.setText(utils.getFormattedDate(extras.getPurchaseDate()));
+        //purchaseDate.setText(utils.getFormattedDate(extras.getPurchaseDate()));
+        //purchaseDate.setText(utils.getFormattedDate(extras.getPurchaseDate()));
         id.setText(String.valueOf(extras.getId()));
 
     }

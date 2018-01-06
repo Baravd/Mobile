@@ -47,7 +47,8 @@ public class ExpenseAdapter extends ArrayAdapter<Expense> {
 
         TextView textView2 = rowView.findViewById(R.id.secondLine);
         utils= new Utils();
-        textView2.setText(utils.getFormattedDate(expense.getPurchaseDate()));
+       // textView2.setText(utils.getFormattedDate(expense.getPurchaseDate()));
+        textView2.setText(expense.getCategory());
 
         ImageView imageView = rowView.findViewById(R.id.icon);
         imageView.setImageResource(R.drawable.ic_launcher_background);
@@ -60,7 +61,10 @@ public class ExpenseAdapter extends ArrayAdapter<Expense> {
     }
 
     public void setExpenses(List<Expense> expenses) {
-        this.expenses = expenses;
+        this.expenses.clear();
+        for(Expense expense: expenses) {
+            this.expenses.add(expense);
+        }
         this.notifyDataSetChanged();
     }
     public void addExpense(Expense expense) {

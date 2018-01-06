@@ -31,5 +31,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Mail Us" />
+
+        <Button
+            android:id="@+id/mainLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

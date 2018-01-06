@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.bvd.android.financemanager.MainActivity;
 import com.bvd.android.financemanager.R;
+import com.bvd.android.financemanager.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -34,7 +35,6 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseReference rootReference;
 
 
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //todo check the role
         if (currentUser != null) {
-            Log.v(TAG,"Signed in as="+currentUser.getEmail());
+            Log.v(TAG, "Signed in as=" + currentUser.getEmail());
             redirectToMainView(currentUser);
         }
     }
@@ -50,6 +50,13 @@ public class LoginActivity extends AppCompatActivity {
     private void redirectToMainView(FirebaseUser currentUser) {
         if (currentUser != null) {
             Intent intent = new Intent(this, MainActivity.class);
+
+            Intent intentInitial = getIntent();
+            if (intentInitial != null) {
+                User user = (User) intentInitial.getSerializableExtra("userData");
+                intent.putExtra("userData", user);
+            }
+
             startActivity(intent);
 
         }

@@ -27,9 +27,10 @@ public class Expense implements Serializable, Comparable<Expense > {
     private String name;
     @ColumnInfo(name="price")
     private float price;
-    @ColumnInfo(name="purchase_date")
-    @TypeConverters({DateConverter.class})
-    private Date purchaseDate;
+   // @ColumnInfo(name="purchase_date")
+
+   /* @TypeConverters({DateConverter.class})
+    private Date purchaseDate;*/
 
 
 
@@ -39,7 +40,7 @@ public class Expense implements Serializable, Comparable<Expense > {
         this.category = category;
         this.name = name;
         this.price = price;
-        this.purchaseDate = purchaseDate;
+        //this.purchaseDate = purchaseDate;
     }
 
     @Ignore
@@ -47,7 +48,7 @@ public class Expense implements Serializable, Comparable<Expense > {
         this.category = category;
         this.name = name;
         this.price = price;
-        this.purchaseDate = purchaseDate;
+        //this.purchaseDate = purchaseDate;
     }
 
     public Expense() {
@@ -85,6 +86,7 @@ public class Expense implements Serializable, Comparable<Expense > {
         this.price = price;
     }
 
+/*
     public Date getPurchaseDate() {
         return purchaseDate;
     }
@@ -92,6 +94,7 @@ public class Expense implements Serializable, Comparable<Expense > {
     public void setPurchaseDate(Date purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
+*/
 
     @Override
     public String toString() {
@@ -100,7 +103,7 @@ public class Expense implements Serializable, Comparable<Expense > {
                 ", category='" + category + '\'' +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", purchaseDate=" + purchaseDate +
+                //", purchaseDate=" + purchaseDate +
                 '}';
     }
 
