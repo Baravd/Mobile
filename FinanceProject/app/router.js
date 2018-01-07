@@ -8,8 +8,13 @@ import ExpenseDetail from "./components/ExpenseDetail";
 import {Mail} from "./components/Mail";
 import {AddExpenseView} from "./components/AddExpenseView";
 import {Statistics} from "./components/Statistics";
+import {Register} from "./login/Register";
+import {LogIn} from "./login/Login";
 
 const Stack = StackNavigator({
+    Loging:{
+        screen: LogIn
+    },
     Home: {
         screen: Home,
     },
@@ -28,6 +33,9 @@ const Stack = StackNavigator({
     },
     Statistics: {
         screen: Statistics,
+    },
+    Register :{
+        screen: Register,
     }
 
 });
