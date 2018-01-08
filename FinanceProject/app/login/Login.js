@@ -14,18 +14,25 @@ class Anchor extends React.Component {
     }
 }
 
-export class LogIn extends React.Component {
+export class Login extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {username: "", password: ""}
-        this.auth = global.firebaseApp.auth();
-        this.auth.onAuthStateChanged((user) => {
+        this.state = {username: "", password: ""};
+        this.auth = global.firebaseApp.auth()
+        const {navigate} = this.props.navigation;
+        console.log("propos=" + JSON.stringify(this.props));
+        console.log("navigate=" + JSON.stringify(navigate));
+        //this.props.navigation.navigate('Home');//, {uid: user.uid});s
+
+        /*this.auth.onAuthStateChanged((user) => {
+
             if (user) {
-                console.log("Autentificarea userului=" + user.email);
-                this.props.navigation.navigate('Home', {uid: user.uid});
+                console.log("Navigate obj=" + JSON.stringify(navigate) + " my props=" + JSON.stringify(this.props));
+                console.log("Autentificarea userului=" + user.email + " user id=" + user.uid);
             }
             else {
+                console.log("Eroare");
                 if (this.state.username != "" && this.state.password != "") {
                     Alert.alert('Log in failed', 'Wrong username or password', [{
                         text: 'OK',
@@ -33,7 +40,7 @@ export class LogIn extends React.Component {
                     }]);
                 }
             }
-        })
+        })*/
     }
 
     render() {
@@ -44,7 +51,13 @@ export class LogIn extends React.Component {
                     <TextInput secureTextEntry={true} style={{flex: 0.8, height: 40}}
                                onChangeText={(password) => this.setState({password})}/>
                     <Button title="LOGIN" onPress={() => {
-                        this.auth.signInWithEmailAndPassword(this.state.username, this.state.password);//.then(this.props.navigation.navigate('Home')
+                        this.auth.signInWithEmailAndPassword(this.state.username, this.state.password).catch(function (error) {
+                            // Handle Errors here.
+                            const errorCode = error.code;
+                            const errorMessage = error.message;
+                            console.log(errorCode + ' ' + errorMessage);
+                            // ...
+                        });//.then(this.props.navigation.navigate('Home')
                     }}/>
                     <Button title="REGISTER" onPress={() => {
                         this.props.navigation.navigate('Register');

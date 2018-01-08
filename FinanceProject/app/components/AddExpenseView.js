@@ -7,7 +7,12 @@ export class AddExpenseView extends Component {
     constructor(props) {
         super(props);
         this.state = { nume: "Name", type: "Type", date: new Date(),id: '-1'};
-
+        this.auth = global.firebaseApp.auth();
+        this.auth.onAuthStateChanged((user)=>{
+            if(user){
+                this.dbRef = global.firebaseApp.database().ref().child('users').child(user.uid).child('expenses');
+            }
+        });
     }
 
     render() {

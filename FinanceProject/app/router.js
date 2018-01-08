@@ -9,11 +9,11 @@ import {Mail} from "./components/Mail";
 import {AddExpenseView} from "./components/AddExpenseView";
 import {Statistics} from "./components/Statistics";
 import {Register} from "./login/Register";
-import {LogIn} from "./login/Login";
+import { Login} from "./login/Login";
 
 const Stack = StackNavigator({
-    Loging:{
-        screen: LogIn
+    Login:{
+        screen: Login
     },
     Home: {
         screen: Home,
